@@ -1,5 +1,16 @@
-export default function Home() {
+import CountryList from '@/components/CountryList';
+import { type Country } from '@/components/types';
+
+export default async function Home() {
+  const response = await fetch(
+    'https://restcountries.com/v3.1/all?fields=name,flags,capital,capitalInfo,currencies,cca2,maps,languages,region,subregion'
+  );
+  const data = (await response.json()) as Country[];
+  data.sort((a, b) => a.name.common.localeCompare(b.name.common));
+
   return (
-    <main>Home</main>
-  )
+    <main>
+      <CountryList countries={data} />
+    </main>
+  );
 }

@@ -1,24 +1,64 @@
 @import 'tailwindcss';
 
+@theme {
+  --breakpoint-3xl: 1920px;
+}
+
+@layer base {
+  h1 {
+    font-size: var(--text-2xl);
+  }
+  h2 {
+    font-size: var(--text-xl);
+  }
+  h3 {
+    font-size: var(--text-lg);
+  }
+  a {
+    color: var(--color-indigo-500);
+    text-decoration-line: underline;
+  }
+  b {
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  .t-cell {
+    @apply px-4 py-2
+  }
+
+  .t-header {
+    @apply px-4 py-2 font-semibold bg-white dark:bg-black text-sm
+  }
+
+  .text-mute {
+    @apply text-gray-500 dark:text-gray-400
+  }
+
+  .bg-mute {
+    @apply bg-white dark:bg-gray-800
+  }
+
+  .divide-mute {
+    @apply divide-gray-100 dark:divide-gray-700
+  }
+}
+
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 255, 255, 255;
+  --foreground: 0, 0, 0, 1;
+  --background: 0, 0, 0, .05;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    --foreground: 255, 255, 255;
+    --background: 0, 0, 0, 1;
   }
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  color: rgba(var(--foreground));
+  background: rgba(var(--background));
 }
 
-@theme {
-  --breakpoint-3xl: 1920px;
-}
