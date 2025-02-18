@@ -21,6 +21,10 @@
   b {
     font-weight: 600;
   }
+
+  button {
+    @apply px-4 py-2 bg-indigo-200 dark:bg-indigo-700 rounded border-b-2 text-sm
+  }
 }
 
 @layer components {
@@ -42,6 +46,14 @@
 
   .divide-mute {
     @apply divide-gray-100 dark:divide-gray-700
+  }
+
+  .border-mute {
+    @apply border-gray-100 dark:border-gray-700
+  }
+
+  .field {
+    @apply p-2 pr-6 border rounded border-gray-100 dark:border-gray-700
   }
 }
 
