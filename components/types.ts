@@ -20,4 +20,5 @@ export type Country = {
     openStreetMaps: string;
   };
   region: string;
+  subregion: string;
 };
