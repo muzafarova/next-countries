@@ -20,7 +20,7 @@ export default function CountryListItem({
         <FlagImage src={flags.svg} alt={flags.alt} />
       </td>
       <td className="t-cell">
-        <b className="block">{name.common}</b>
+        <b className="block text-ellipsis">{name.common}</b>
         {name.official !== name.common ? (
           <small className="inline-block text-mute leading-5">
             (Off. {name.official})

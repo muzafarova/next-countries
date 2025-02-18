@@ -1,22 +1,45 @@
 'use client';
-import { ReactNode } from 'react';
+import { useState } from 'react';
 import CountryListItem from './CountryListItem';
 import { type Country } from './types';
+import SearchByName from './SearchByName';
+import RegionSelect from './RegionSelect';
 
-export default function CountryList({
-  children,
-  countries,
-}: {
-  children: ReactNode;
-  countries: Country[];
-}) {
+export default function CountryList({ countries }: { countries: Country[] }) {
+  const [search, setSearch] = useState('');
+  const [region, setRegion] = useState('');
+  const filteredCountries = countries
+    .filter((country) => {
+      if (!search) {
+        return true;
+      }
+      return (
+        country.name.common.toLowerCase().match(search.toLowerCase()) ||
+        country.name.official.toLowerCase().match(search.toLowerCase())
+      );
+    })
+    .filter((country) => {
+      if (!region) {
+        return true;
+      }
+      return country.region === region;
+    });
+
   return (
     <div className="p-8">
-      {children}
+      <div className="p-4 mb-8 flex gap-4 bg-gray-50 dark:bg-gray-800 rounded">
+        <RegionSelect
+          countries={countries}
+          region={region}
+          setRegion={setRegion}
+        />
+        <SearchByName search={search} update={setSearch} />
+      </div>
+
       <header className="mb-4">
-        <h1>Countries ({countries.length})</h1>
+        <h1>Countries ({filteredCountries.length})</h1>
       </header>
-      <table className="table-auto bg-mute divide-y divide-mute text-left rounded ">
+      <table className="table-auto bg-mute divide-y divide-mute text-left rounded w-full">
         <thead>
           <tr>
             <th className="t-header">Flag</th>
@@ -29,7 +52,7 @@ export default function CountryList({
           </tr>
         </thead>
         <tbody className="divide-y divide-mute">
-          {countries.map((country) => (
+          {filteredCountries.map((country) => (
             <CountryListItem key={country.cca2} {...country} />
           ))}
         </tbody>
