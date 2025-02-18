@@ -1,9 +1,18 @@
+'use client';
+import { ReactNode } from 'react';
 import CountryListItem from './CountryListItem';
 import { type Country } from './types';
 
-export default function CountryList({ countries }: { countries: Country[] }) {
+export default function CountryList({
+  children,
+  countries,
+}: {
+  children: ReactNode;
+  countries: Country[];
+}) {
   return (
     <div className="p-8">
+      {children}
       <header className="mb-4">
         <h1>Countries ({countries.length})</h1>
       </header>
